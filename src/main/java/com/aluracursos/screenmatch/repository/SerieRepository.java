@@ -9,17 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SerieRepository extends JpaRepository<Serie,Long> {
-    Optional<Serie> findTituloContainingIgnoreCase(String nombreSerie);
-
-    List<Serie>findByGenero(Categoria categoria);
-
-    @Query("select s from Serie s WHERE s.totalTemporadas<=: totalTemporadas AND s.evaluacion >=:evaluacion")
-    List<Serie>seriesPorTemporadaYEvaluacion(int totalTemporadas,double evaluacion);
-
-
-    //otros métodos
+    Optional<Serie> findByTituloContainingIgnoreCase(String nombreSerie);
+    List<Serie> findTop5ByOrderByEvaluacionDesc();
+    List<Serie> findByGenero(Categoria categoria);
+    @Query("select s from Serie s WHERE s.totalTemporadas <= :totalTemporadas AND s.evaluacion >= :evaluacion")
+    List<Serie> seriesPorTemporadaYEvaluacion(int totalTemporadas, double evaluacion);
     @Query("SELECT s FROM Serie s " + "JOIN s.episodios e " + "GROUP BY s " + "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
     List<Serie> lanzamientosMasRecientes();
-
-    List<Serie> findTop5ByOrderByEvaluacionDesc();
 }
