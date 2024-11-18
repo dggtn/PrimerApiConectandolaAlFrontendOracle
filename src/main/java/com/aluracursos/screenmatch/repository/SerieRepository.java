@@ -11,8 +11,6 @@ import java.util.Optional;
 public interface SerieRepository extends JpaRepository<Serie,Long> {
     Optional<Serie> findTituloContainingIgnoreCase(String nombreSerie);
 
-    List<Serie> findTop5ByEvaluacionDesc();
-
     List<Serie>findByGenero(Categoria categoria);
 
     @Query("select s from Serie s WHERE s.totalTemporadas<=: totalTemporadas AND s.evaluacion >=:evaluacion")
