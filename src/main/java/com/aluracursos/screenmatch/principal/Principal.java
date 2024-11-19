@@ -32,7 +32,7 @@ public class Principal {
                     1 - Buscar series 
                     2 - Buscar episodios
                     3 - Mostrar series buscadas
-                                  
+                    
                     0 - Salir
                     """;
             System.out.println(menu);
@@ -67,6 +67,7 @@ public class Principal {
         DatosSerie datos = conversor.obtenerDatos(json, DatosSerie.class);
         return datos;
     }
+
     private void buscarEpisodioPorSerie() {
         mostrarSeriesBuscadas();
         System.out.println("Escribe el nombre de la seria de la cual quieres ver los episodios");
@@ -76,7 +77,7 @@ public class Principal {
                 .filter(s -> s.getTitulo().toLowerCase().contains(nombreSerie.toLowerCase()))
                 .findFirst();
 
-        if(serie.isPresent()){
+        if (serie.isPresent()) {
             var serieEncontrada = serie.get();
             List<DatosTemporadas> temporadas = new ArrayList<>();
 
@@ -97,8 +98,8 @@ public class Principal {
         }
 
 
-
     }
+
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
         Serie serie = new Serie(datos);
